@@ -1,48 +1,56 @@
-import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Users, 
-  Shield, 
-  Settings, 
+import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Users,
+  Shield,
+  Settings,
   FileText,
   ChevronLeft,
   ChevronRight,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+  UserCheck, // New icon for KYC
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   collapsed: boolean;
   onToggle: () => void;
 }
 
+// --- UPDATED navItems Array ---
 const navItems = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/users', icon: Users, label: 'Users' },
-  { to: '/roles', icon: Shield, label: 'Roles' },
-  { to: '/audit', icon: FileText, label: 'Audit Logs' },
-  { to: '/settings', icon: Settings, label: 'Settings' },
+  { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  // This is the main change:
+  { to: "/users-normal", icon: Users, label: "Normal Users" },
+  { to: "/users-kyc", icon: UserCheck, label: "User KYC" },
+  // The original "/users" link is removed from the nav
+  { to: "/roles", icon: Shield, label: "Roles" },
+  { to: "/audit", icon: FileText, label: "Audit Logs" },
+  { to: "/settings", icon: Settings, label: "Settings" },
 ];
+// ------------------------------
 
 export const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        'relative flex h-screen flex-col border-r bg-sidebar transition-all duration-300',
-        collapsed ? 'w-16' : 'w-64'
+        "relative flex h-screen flex-col border-r bg-sidebar transition-all duration-300",
+        collapsed ? "w-16" : "w-64",
       )}
     >
       {/* Logo */}
       <div className="flex h-16 items-center justify-between border-b px-4">
         {!collapsed && (
-          <h1 className="text-xl font-bold text-sidebar-foreground">Admin Panel</h1>
+          <h1 className="text-xl font-bold text-sidebar-foreground">
+            Admin Panel
+          </h1>
         )}
         <Button
           variant="ghost"
           size="icon"
           onClick={onToggle}
           className="h-8 w-8"
-          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? (
             <ChevronRight className="h-4 w-4" />
@@ -60,12 +68,12 @@ export const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
             to={item.to}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
-                'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 isActive
-                  ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-                  : 'text-sidebar-foreground',
-                collapsed && 'justify-center'
+                  ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                  : "text-sidebar-foreground",
+                collapsed && "justify-center",
               )
             }
             title={collapsed ? item.label : undefined}

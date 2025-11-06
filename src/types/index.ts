@@ -89,3 +89,29 @@ export interface UserFormData {
   roles: string[];
   status: 'active' | 'inactive' | 'suspended';
 }
+
+// --- YouPi Backend Types ---
+
+// Based on youpi/src/main/java/com/youpi/youpi/entity/UsersNormal.java
+export interface UserNormal {
+  id: number;
+  profileImageUrl?: string;
+  mobileNumber: string;
+  fullName: string;
+  email: string;
+  fireBaseUUID: string;
+  gender: string;
+  active: boolean;
+  verified: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Based on youpi/src/main/java/com/youpi/youpi/dto/UsersKycStatusDTO.java
+export interface UserKycStatusDTO {
+  userId: number;
+  name: string;
+  mobileNumber: string;
+  kycSubmitted: boolean;
+  kycStatus: "PENDING" | "VERIFIED" | "REJECTED" | "NOT_SUBMITTED";
+}

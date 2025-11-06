@@ -7,11 +7,16 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { PrivateRoute } from "@/components/PrivateRoute";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Users from "./pages/Users";
+import Users from "./pages/Users"; // The original mock page
 import Roles from "./pages/Roles";
 import Audit from "./pages/Audit";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+
+// --- Import our new pages ---
+import UsersNormal from "./pages/UsersNormal";
+import UsersKyc from "./pages/UsersKyc";
+// ----------------------------
 
 const queryClient = new QueryClient();
 
@@ -41,6 +46,24 @@ const App = () => (
                 </PrivateRoute>
               }
             />
+            {/* --- Add our new routes --- */}
+            <Route
+              path="/users-normal"
+              element={
+                <PrivateRoute>
+                  <UsersNormal />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/users-kyc"
+              element={
+                <PrivateRoute>
+                  <UsersKyc />
+                </PrivateRoute>
+              }
+            />
+            {/* ------------------------- */}
             <Route
               path="/roles"
               element={
